@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+#include <cstdlib>
+using namespace std;
+#define int long long
+#define piii pair<int,int>
+//sort(puch,puch+n,greater<int>());
+struct place{
+	int u,v;
+};
+vector<place>s;
+bool cmp(place x,place y){
+	if(x.v==y.v){
+		return x.u<y.u;
+	}
+	else return x.v<y.v;
+}
+int n,m,a1,a2,b1,b2;
+int ans;
+char arr[1001][1001];
+int d[1001][1001];
+int dx[8]={-1,-2,-2,-1,1,2,2,1}, dy[8]={-2,-1,1,2,2,1,-1,-2};
+void solve(){
+	cin>>n>>m;
+	queue<piii>q;
+	for(int i=1;i<=m;i++){
+		for(int j=1;j<=n;j++){
+			cin>>arr[i][j];
+			d[i][j]=0;
+			if(arr[i][j]=='K'){
+				a1=i,a2=j;
+			}
+			if(arr[i][j]=='H'){
+				b1=i,b2=j;
+			}
+		}
+	}
+	q.push({a1,a2});
+	while(!q.empty()){
+		auto&[x,y]=q.front();
+		q.pop();
+		for(int i=0;i<8;i++){
+			int xx=x+dx[i];
+			int yy=y+dy[i];
+			if(xx<1||xx>m||yy<1||yy>n||arr[xx][yy]=='*'||d[xx][yy]!=0)continue;
+			d[xx][yy]=d[x][y]+1;
+			if(xx==b1&&yy==b2){
+				cout<<d[xx][yy];
+				return;
+			}
+			q.push({xx,yy});
+			
+		}
+	}
+	
+}
+signed main(){
+	solve();
+}
