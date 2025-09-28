@@ -3,7 +3,7 @@
 using namespace std;
 #define int long long
 int n,w;
-int ans=n;
+int ans=100000000;
 int puch[20];
 int sum[20]={0};
 void dfs(int u,int v){
